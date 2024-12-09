@@ -23,8 +23,14 @@ public class Ex1 {
         int ans = -1;
         if(!isNumber(num))
            return ans;
-
+        if (!num.contains("b"))
+            if( num.matches("^[0-9]+$")) {
+                ans = Integer.parseInt(num);
+                return ans;
+            }
             int index = num.lastIndexOf('b');
+            if(index== -1)
+                return -1;
             String numberPart = num.substring(0, index);
             String basePart = num.substring(index + 1);
             int base=0;
@@ -60,9 +66,9 @@ public class Ex1 {
         // Check for null or empty string
         if (a == null || a.isEmpty())
             return false;
-        if (!a.contains("b")) {
+        if (!a.contains("b"))
             return a.matches("^[0-9]+$");
-        }
+
         if (!a.matches("^[0-9A-F]+b[2-9A-G]$"))  // Check if the string matches the regex
             return false;
         int index = a.lastIndexOf('b');
@@ -101,7 +107,30 @@ public class Ex1 {
      */
     public static String int2Number(int num, int base) {
         String ans = "";
-
+        if(num<0 || base<2 || base>16)
+        return ans;
+        if(num == 0)
+            return "0";
+        String temp= "";
+        if(base>=10)
+        {
+            char charForBase = (char) ('A' + base - 10);
+            String s = Character.toString(charForBase);
+            temp= temp+ s +'b';
+        } else if (base<10)
+        {
+        temp= temp + base+ 'b';
+        }
+        while(num>0)
+        {
+            int value = num% base;
+            temp+= value;
+            num= num/base;
+        }
+        for(int i =temp.length()-1;i>=0; i--) //reverse the function
+        {
+            ans+=temp.charAt(i);
+        }
         return ans;
     }
 
@@ -112,11 +141,7 @@ public class Ex1 {
      * @return true iff the two numbers have the same values.
      */
     public static boolean equals(String n1, String n2) {
-        boolean ans = true;
-        // add your code here
-
-        ////////////////////
-        return ans;
+        return number2Int(n1) == number2Int(n2);
     }
 
     /**
@@ -128,10 +153,15 @@ public class Ex1 {
      *
      */
     public static int maxIndex(String[] arr) {
-        int ans = 0;
-        // add your code here
-
-        ////////////////////
+        int ans = -1;
+        int max=-1;
+        for(int i=0; i<arr.length; i++)
+        {
+            if(number2Int(arr[i])>max) {
+                max = number2Int(arr[i]);
+                ans=i;
+            }
+        }
         return ans;
     }
 }
