@@ -49,17 +49,16 @@ public class Ex1Main {
             }
             int sum = Ex1.number2Int(num1) + Ex1.number2Int(num2);
             int mult = Ex1.number2Int(num1) * Ex1.number2Int(num2);
-            String sumInBase = Ex1.int2Number(sum, base);
-            String multInBase = Ex1.int2Number(mult, base);
-            System.out.println(num1 + " + " + num2 + " = " + sumInBase);
-            System.out.println(num1 + " * " + num2 + " = " + multInBase);
-            String[] arr = {num1, num2, sumInBase, multInBase};
+            String sumBase = Ex1.int2Number(sum, base);
+            String multBase = Ex1.int2Number(mult, base);
+            System.out.println(num1 + " + " + num2 + " = " + sumBase);
+            System.out.println(num1 + " * " + num2 + " = " + multBase);
+            String[] arr = {num1, num2, sumBase, multBase};
             int maxIndex = Ex1.maxIndex(arr);
             String maxNumber = arr[maxIndex];
             System.out.println("Max number over [" + String.join(",", arr) + "] is: " + maxNumber);
         }
 
         System.out.println("quitting now...");
-        sc.close();
     }
 }
